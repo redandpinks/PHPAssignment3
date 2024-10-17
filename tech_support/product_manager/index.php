@@ -20,7 +20,15 @@ switch ($action) {
         break;
 
     case 'add_product':
-        include('../product_manager/add_product.php');
+        try {
+            include('../product_manager/add_product.php');
+        } catch (TypeError $e) {
+            $error = "TypeError: " . $e->getMessage();
+            include('../errors/error.php');
+        } catch (Exception $e) {
+            $error = "An error occurred: " . $e->getMessage();
+            include('../errors/error.php');
+        }
         break;
 
     case 'delete_product':
